@@ -90,6 +90,9 @@ RUN sed -i \
        'PORT': '5432'" \
   personal_data/var/settings.py
 
+RUN echo "SESSION_COOKIE_SECURE = False" >> personal_data/var/settings.py
+RUN cat personal_data/var/settings.py
+
 COPY entrypoint /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "openslides.asgi:application"]
